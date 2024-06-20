@@ -17,6 +17,7 @@
 # install requirements
 - `pip install gunicorn`
 - `pip install python-dotenv`
+- `pip install flask`
 
 - create Procfile
     `web: gunicorn application:app`
@@ -30,5 +31,8 @@
 - on browers: `http://127.0.0.1:8082`
 
 # HEROKU DEPLOYMENT
-
+- heroku login (use andre email)
+- see apps: heroku apps
+- see info: heroku info --app climate-change-app-server
+- see logs: heroku logs --tail --app climate-change-app-server
 
