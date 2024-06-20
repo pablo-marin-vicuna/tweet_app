@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Climate Tweet Sentiment Analyzer</title>
+ </head>
+<body>
+        <h1>Welcome to the Climate Tweet Sentiment Analyzer</h1>
+        <h2>Please enter information of the date and message of the Tweet.</h2>
+        <form action = "{{ url_for('tweet_eval') }}" method="POST">
+            <table border="1" style="border-color:gray; border-collapse:collapse;" cellpadding="5" cellspacing="5">
+                <tr>           
+                    <td><h4>Date of the Tweet</h4>
+                        <label for="date">Select Date:</label>
+                        <input type="date" id="date" name="date" value="<?php echo date('Y-m-d'); ?>">
+                </tr>
+                <tr>
+                    </td>
+                    <td><h4>Message of the Tweet</h4>
+                        <label for="text">Enter Text:</label>
+                        <textarea id="text" name="text" maxlength="300" rows="10" cols="100" placeholder="Type your text here..."></textarea>
+                    </td>
+                </tr>
+  
+            </table>
+            <!-- <input type="hidden" id="forminput" name="forminput"  >    -->        
+            <p><input type="submit" value="What is sentiment of this Tweet?"></p>
+             {% if (results) %} 
+             <h2> Sentiment prediction: {{ results }}  </h2>
+             <h3> with probability: {{ results }}  </h3>
+             {% endif %} 
+        </form>
+</body>
+</html>
