@@ -25,9 +25,8 @@ def tweet_eval():
     print("input data:",input_data)
 
     #url for model
-    url = "http://localhost:5000/api" # use this locally
-    #url = "https://bank-model-app.herokuapp.com/api" 
-    #url = "https://car-eval-model-cdd5c766580c.herokuapp.com/api"
+    #url = "http://localhost:5000/api" # use this locally
+    url = 'https://climate-change-model-12a504c55e5e.herokuapp.com/api' # for herooku deploy
 
     # Post data to URL with correct headers
     headers = {'Content-Type': 'application/json'}
