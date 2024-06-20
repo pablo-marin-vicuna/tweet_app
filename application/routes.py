@@ -26,8 +26,7 @@ def tweet_eval():
 
     #url for model
     #url = "http://localhost:5000/api" # use this locally
-    #url = 'https://climate-change-model-12a504c55e5e.herokuapp.com/api' # for herooku deploy
-    url = 'https://climate-change-model-12a504c55e5e.herokuapp.com'
+    url = 'https://climate-change-model-12a504c55e5e.herokuapp.com/api' # for herooku deploy
     
     # Post data to URL with correct headers
     headers = {'Content-Type': 'application/json'}
