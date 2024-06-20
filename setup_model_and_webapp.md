@@ -35,4 +35,4 @@
 - see apps: heroku apps
 - see info: heroku info --app climate-change-app-server
 - see logs: heroku logs --tail --app climate-change-app-server
-
+- See deployment: https://climate-change-app-server-6c4cbb1cf04f.herokuapp.com/
