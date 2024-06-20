@@ -22,15 +22,29 @@ def tweet_eval():
 
     #convert data to json
     input_data = json.dumps({"date": date, "text": text})
+    print("input data:",input_data)
 
     #url for model
     url = "http://localhost:5000/api" # use this locally
     #url = "https://bank-model-app.herokuapp.com/api" 
     #url = "https://car-eval-model-cdd5c766580c.herokuapp.com/api"
 
+    # Post data to URL with correct headers
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post(url, data=input_data, headers=headers)
+
+    # Check for errors in response
+    if response.status_code != 200:
+        return render_template("index.html", date=date, text=text, results=f"Error: {response.status_code} - {response.content.decode('UTF-8')}")
+
+    response_data = response.json()
+
+    # Send input values and prediction result to index.html for display
+    return render_template("index.html", date=date, text=text, results=response_data)
+
     #post data to url
-    results =  requests.post(url, input_data)
+    #results =  requests.post(url, input_data)
 
     #send input values and prediction result to index.html for display
-    return render_template("index.html", date = date, text = text, results=results.content.decode('UTF-8'))
+    #return render_template("index.html", date = date, text = text, results=results.content.decode('UTF-8'))
   

@@ -1,33 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Climate Tweet Sentiment Analyzer</title>
- </head>
+    <title>Climate Change Tweet Sentiment Analyzer</title>
+</head>
 <body>
-        <h1>Welcome to the Climate Tweet Sentiment Analyzer</h1>
-        <h2>Please enter information of the date and message of the Tweet.</h2>
-        <form action = "{{ url_for('tweet_eval') }}" method="POST">
-            <table border="1" style="border-color:gray; border-collapse:collapse;" cellpadding="5" cellspacing="5">
-                <tr>           
-                    <td><h4>Date of the Tweet</h4>
-                        <label for="date">Select Date:</label>
-                        <input type="date" id="date" name="date" value="<?php echo date('Y-m-d'); ?>">
-                </tr>
-                <tr>
-                    </td>
-                    <td><h4>Message of the Tweet</h4>
-                        <label for="text">Enter Text:</label>
-                        <textarea id="text" name="text" maxlength="300" rows="10" cols="100" placeholder="Type your text here..."></textarea>
-                    </td>
-                </tr>
-  
-            </table>
-            <!-- <input type="hidden" id="forminput" name="forminput"  >    -->        
-            <p><input type="submit" value="What is sentiment of this Tweet?"></p>
-             {% if (results) %} 
-             <h2> Sentiment prediction: {{ results }}  </h2>
-             <h3> with probability: {{ results }}  </h3>
-             {% endif %} 
-        </form>
+    <h1>Welcome to the Climate Change Tweet Sentiment Analyzer</h1>
+    <h2>Please enter information of the date and message of the Tweet.</h2>
+    <form action="{{ url_for('tweet_eval') }}" method="POST">
+        <table border="1" style="border-color:gray; border-collapse:collapse;" cellpadding="5" cellspacing="5">
+            <tr>
+                <td>
+                    <h4>Date of the Tweet</h4>
+                    <label for="date">Select Date:</label>
+                    <input type="date" id="date" name="date" value="<?php echo date('Y-m-d'); ?>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h4>Message of the Tweet</h4>
+                    <label for="text">Enter Text:</label>
+                    <textarea id="text" name="text" maxlength="300" rows="5" cols="100" placeholder="Type your text here..."></textarea>
+                    <br>
+                    <button type="button" onclick="addDemoText()">Add Demo Text and Date</button>
+                </td>
+            </tr>
+        </table>
+        <p><input type="submit" value="What is sentiment of this Tweet towards Climate Change?"></p>
+        {% if results %}
+        <h2>Predicted Sentiment: {{ results['predicted_class'] }} ({{ results['predicted_class_description'] }})</h2>
+        <h3>Probability of Predicted Sentiment: {{ results['predicted_class_probability'] }}</h3>
+        <h3>All Class Probabilities:</h3>
+        <ul>
+            {% for prob in results['class_probabilities'] %}
+            <li>ProbClass {{ prob['class'] }} ({{ prob['description'] }}): {{ prob['probability'] }}</li>
+            {% endfor %}
+        </ul>
+        <h3>Feature Values:</h3>
+        <ul>
+            {% for feature, value in results['features'].items() %}
+            <li>{{ feature }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </form>
+    <h4>Authors: Pablo Marin Vicuna (pmarin@andrew.cmu.edu) - Marvin Espinoza-Leiva (mespinoz@andrew.cmu.edu) .</h4>
+    
+    <script>
+        function addDemoText() {
+            var demoText = "RT this a retweet @test with #hashtag, links https://fake.com and an emoji \uD83D\uDE00";
+            document.getElementById('text').value = demoText;
+            document.getElementById('date').value = '2024-06-20';
+        }
+    </script>
 </body>
 </html>
